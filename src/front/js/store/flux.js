@@ -1,54 +1,49 @@
+const apiUrl = "https://www.swapi.tech/api/";
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
-		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
+  return {
+    store: {
+      planets: [],
+      species: [],
+      films: [],
+      people: [],
+      starships: [],
+      vehicles: [],
+      planetsid: [],
+    },
 
-			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				}catch(error){
-					console.log("Error loading message from backend", error)
-				}
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+    actions: {
+      getResources: async (resource) => {
+        let response = await fetch(apiUrl + resource);
+        if (!response.ok) {
+          console.log(response.status + ": " + response.statusText);
+          return;
+        }
+        let data = await response.json();
+        let newStore = { ...getStore() };
+        newStore[resource] = data.results || data.result;
+        setStore(newStore);
+      },
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+      getDetails: async (resource, id) => {
+        let response = await fetch(`https://www.swapi.tech/api/${resource}/${id}`);
+        if (!response.ok) {
+          console.log(response.status + ": " + response.statusText);
+          return;
+        }
+        let data = await response.json()
+        return {
+          ...data.result.properties
+        }
+        
+      },
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
-	};
+      //loadInfo: async () => {
+        //fetch(`https://www.swapi.tech/api/${resource}/${id}`)
+          //  .then((res) => res.json())
+            //.then((data) => setStore(planetsid = data.result.properties))
+     // }
+    },
+  };
 };
 
 export default getState;
