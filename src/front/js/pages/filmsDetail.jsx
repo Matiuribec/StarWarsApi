@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
 import CardDetail from "../component/CardDetail.jsx"
-import propTypes from "prop-types";
+
 
 export const FilmDetail = () => {
   const { store, actions } = useContext(Context);
@@ -13,7 +13,7 @@ export const FilmDetail = () => {
     actions.getDetails("films", filmid)
     .then(reply=>(setData(reply)))
   }, []);
-
+  
   return (
     <div className="jumbotron">
       <h1 className="display-4">Films</h1>
@@ -21,11 +21,17 @@ export const FilmDetail = () => {
         <div className="row">
           <div className="col" >
               <CardDetail
-                
+                img={`https://starwars-visualguide.com/assets/img/films/${filmid}.jpg`}
+                text= {<div>
+                  <ul>
+                    <li>Title: {data?.title}</li>
+                    <li>Director: {data?.director} </li>
+                    <li>Episode #: {data?.episode_id}</li>
+                    <li>Producer:{data?.producer} </li>
+                    <li>Release: {data?.release_date} </li>
+                  </ul>
+                </div>}
                 type="films"
-                text="=Star Wars film"
-                //img={`https://starwars-visualguide.com/assets/img/films/${filmid}.jpg`}
-                
               />
             </div>
           </div>

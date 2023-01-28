@@ -1,16 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
 import Cards from "../component/Cards.jsx";
+import Pagination from "../component/Pagination.jsx";
 
 export const Planets = (props) => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
+   const [searchParams, setSearchParams] = useSearchParams();
+  const [pages, setPages] = useState(0)
+  const [currentPage, setcurrentPage] = useState(1)
 
-  useEffect(() => {
-    actions.getResources("planets");
-  }, []);
+  useEffect(async() => {
+    actions.getResources("planets", {page:searchParams.get("page")}).then((resp) => {
+      if(resp) {
+       console.log(resp.pages)
+        setPages (resp.pages);
+        
+      }
+    }
+    
+    )
+  }, [searchParams.get("page")]);
 
   return (
     <div className="jumbotron">
@@ -28,6 +39,13 @@ export const Planets = (props) => {
               />
             </div>
           ))}
+        </div>
+        <div className="col">
+            <Pagination 
+            pages={pages}
+            currentPage={currentPage}
+            type={"planets"}
+            />
         </div>
       </div>
     </div>

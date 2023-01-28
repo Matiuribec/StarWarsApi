@@ -2,10 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const CardDetail = (props) => {
+
+  
   return (
-    <div className="card">
+    <div className="card mx-auto" style={{width: "28rem"}}>
       <img
-        src={props.img}
+        src={props.img} 
         className="card-img-top"
         alt={props.type.toUpperCase() + " " + props.title}
       />
@@ -13,18 +15,11 @@ const CardDetail = (props) => {
         <h5 className="card-title">{props.title}</h5>
         
             {props.text}
-            {props.name}
-            {props.diameter}
-            {props.rotation_period}
-            {props.orbital_period}
-            {props.gravity}
-            {props.population}
-            {props.climate}
-            {props.terrain}
+            
             
         
-        <Link to={`/planets/${props.id}`} className="btn btn-primary">
-          Go somewhere
+        <Link to={-1} className="btn btn-primary">
+          Go Back
         </Link>
       </div>
     </div>

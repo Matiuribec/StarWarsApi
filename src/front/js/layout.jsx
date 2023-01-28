@@ -10,9 +10,14 @@ import { Characters } from "./pages/Characters.jsx";
 import { Starships } from "./pages/Starships.jsx";
 import { Vehicles } from "./pages/Vehicles.jsx";
 import { PlanetDetail } from "./pages/planetsDetail.jsx";
+import {FilmDetail} from "./pages/filmsDetail.jsx"
+import {SpeciesDetail} from "./pages/speciesDetail.jsx"
+import {StarshipsDetail} from "./pages/starshipsDetail.jsx"
+import {VehiclesDetail} from "./pages/vehiclesDetail.jsx"
+
 
 import injectContext from "./store/appContext.jsx";
-
+import {Cards} from "./component/Cards.jsx"
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 
@@ -30,13 +35,17 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Species />} path="/species" />
+                        <Route element={<SpeciesDetail />} path="/species/:specieid" />
                         <Route element={<Planets />} path="/planets" />
                         <Route element={<Films />} path="/films" />
+                        <Route element={<FilmDetail />} path="/films/:filmid" />
                         <Route element={<Home />} path="/home" />
                         <Route element={<PlanetDetail />} path="/planets/:planetid" />
                         <Route element={<Characters />} path="/characters" />
                         <Route element={<Starships />} path="/starships" />
+                        <Route element={<StarshipsDetail />} path="/starships/:starshipsid" />
                         <Route element={<Vehicles />} path="/Vehicles" />
+                        <Route element={<VehiclesDetail />} path="/Vehicles/:vehicleid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

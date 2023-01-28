@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
 import CardDetail from "../component/CardDetail.jsx"
-import propTypes from "prop-types";
 
-export const speciesDetail = () => {
+
+export const SpeciesDetail = () => {
   const { store, actions } = useContext(Context);
   const { specieid } = useParams();
   const [data, setData] = useState();
@@ -21,10 +21,25 @@ export const speciesDetail = () => {
         <div className="row">
           <div className="col" >
               <CardDetail
-                
+                img={`https://starwars-visualguide.com/assets/img/species/${specieid}.jpg`}
+                text= {<div>
+                  <ul>
+                    <li>Average Height: {data?.average_height} </li>
+                    <li>Average Lifespan: {data?.average_lifespan}</li>
+                    <li>Classification: {data?.classification} </li>
+                    <li>Designation: {data?.designation} </li>
+                    <li>Eye Colors: {data?.eye_colors}</li>
+                    <li>Hair Colors: {data?.hair_colors}</li>
+                    <li>Language: {data?.language}</li>
+                    <li>Name: {data?.name}</li>
+                    <li>Skin Color: {data?.skin_colors}</li>
+
+
+                  </ul>
+                  </div>}
                 type="species"
-                text="Specie from a Star Wars film"
-                //img={`https://starwars-visualguide.com/assets/img/species/${specieid}.jpg`}
+                
+                
                 
               />
             </div>
@@ -35,4 +50,4 @@ export const speciesDetail = () => {
   );
 };
 
-export default specieDetail;
+export default SpeciesDetail;
