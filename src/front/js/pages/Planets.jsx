@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Context } from "../store/appContext.jsx";
 import Cards from "../component/Cards.jsx";
-import Pagination from "../component/Pagination.jsx";
+
 
 export const Planets = (props) => {
   const { store, actions } = useContext(Context);
@@ -29,7 +29,7 @@ export const Planets = (props) => {
       <div className="container">
         <div className="row">
           {store.planets.map((planet) => (
-            <div key={planet.uid} className="col">
+            <div key={planet.uid} className="col-4 md-2">
               <Cards
                 id={planet.uid}
                 type="planets"
@@ -39,13 +39,6 @@ export const Planets = (props) => {
               />
             </div>
           ))}
-        </div>
-        <div className="col">
-            <Pagination 
-            pages={pages}
-            currentPage={currentPage}
-            type={"planets"}
-            />
         </div>
       </div>
     </div>

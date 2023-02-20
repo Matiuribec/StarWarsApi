@@ -17,9 +17,10 @@ import {VehiclesDetail} from "./pages/vehiclesDetail.jsx"
 
 
 import injectContext from "./store/appContext.jsx";
-import {Cards} from "./component/Cards.jsx"
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
+
+
 
 
 //create your first component

@@ -16,10 +16,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         // pagination:
         // page:
         // limit:
-        let params = "";
-        if (!!pagination.pages) {
-          params = `?pages= ${pagination.pages}&limit=${pagination.limit || 10}`
-        }
+        // let params = "";
+        // if (!!pagination.pages) {
+        //   params = `?pages= ${pagination.pages}&limit=${pagination.limit || 10}`
+        // }
         let response = await fetch(apiUrl + resource);
         if (!response.ok) {
           console.log(response.status + ": " + response.statusText);
